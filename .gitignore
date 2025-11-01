@@ -22,6 +22,7 @@ backend/npm-debug.log*
 backend/yarn-debug.log*
 backend/yarn-error.log*
 backend/.DS_Store
+backend/package-lock.json
 
 # IDE
 .vscode/
