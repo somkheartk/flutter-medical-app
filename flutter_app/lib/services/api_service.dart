@@ -19,7 +19,9 @@ class ApiService {
         throw Exception('Failed to load appointments');
       }
     } catch (e) {
-      // Return empty list if backend is not available
+      // Log error for debugging
+      print('Error fetching appointments: $e');
+      // Return empty list as fallback
       return [];
     }
   }
@@ -60,7 +62,9 @@ class ApiService {
         throw Exception('Failed to load patients');
       }
     } catch (e) {
-      // Return empty list if backend is not available
+      // Log error for debugging
+      print('Error fetching patients: $e');
+      // Return empty list as fallback
       return [];
     }
   }

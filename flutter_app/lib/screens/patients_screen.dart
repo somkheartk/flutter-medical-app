@@ -137,43 +137,48 @@ class _PatientsScreenState extends State<PatientsScreen> {
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('เพิ่มผู้ป่วยใหม่'), // Add New Patient
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  labelText: 'ชื่อ-นามสกุล', // Full Name
-                  border: OutlineInputBorder(),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text('เพิ่มผู้ป่วยใหม่'), // Add New Patient
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'ชื่อ-นามสกุล', // Full Name
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: ageController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'อายุ', // Age
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: ageController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: 'อายุ', // Age
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              DropdownButtonFormField<String>(
-                value: selectedGender,
-                decoration: const InputDecoration(
-                  labelText: 'เพศ', // Gender
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<String>(
+                  value: selectedGender,
+                  decoration: const InputDecoration(
+                    labelText: 'เพศ', // Gender
+                    border: OutlineInputBorder(),
+                  ),
+                  items: const [
+                    DropdownMenuItem(value: 'ชาย', child: Text('ชาย')), // Male
+                    DropdownMenuItem(value: 'หญิง', child: Text('หญิง')), // Female
+                  ],
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() {
+                        selectedGender = value;
+                      });
+                    }
+                  },
                 ),
-                items: const [
-                  DropdownMenuItem(value: 'ชาย', child: Text('ชาย')), // Male
-                  DropdownMenuItem(value: 'หญิง', child: Text('หญิง')), // Female
-                ],
-                onChanged: (value) {
-                  if (value != null) selectedGender = value;
-                },
-              ),
               const SizedBox(height: 12),
               TextField(
                 controller: phoneController,
@@ -222,7 +227,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
           ),
         ],
       ),
-    );
+    ),
+  );
   }
 
   Future<void> _deletePatient(String id) async {

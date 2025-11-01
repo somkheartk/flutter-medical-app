@@ -5,10 +5,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
   // Enable CORS for Flutter app
+  // For production, specify exact origins instead of '*'
   app.enableCors({
-    origin: '*',
+    origin: process.env.CORS_ORIGIN || '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
+    credentials: false, // Set to false when using wildcard origin
   });
 
   // Set global prefix
